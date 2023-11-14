@@ -36,8 +36,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   int _totalLaps = 0;
-  int _timeLeft = 0;
-  int _totalTime = 0;
+  String _timeLeft = "00:00:00";
+  String _totalTime = "00:00:00";
   final raceDurationController = TextEditingController(text: "00:20:00");
   final averageLaptimeController = TextEditingController(text: "01:39.7");
 
@@ -125,12 +125,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               leading: Icon(Icons.info),
               title: Text('Time remaining on final lap:'),
-              subtitle: Text(_timeLeft.toString()),
+              subtitle: Text(_timeLeft),
             ),
             ListTile(
               leading: Icon(Icons.info),
               title: Text('Total time:'),
-              subtitle: Text(_totalTime.toString()),
+              subtitle: Text(_totalTime),
             ),
             const SizedBox(height: 20),
             Container(
