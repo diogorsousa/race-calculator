@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
+        colorScheme: const ColorScheme.dark()
+            .copyWith(primary: const Color.fromARGB(255, 50, 146, 130)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Lap Calculator'),
@@ -34,18 +36,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final int _counter = 0;
   int _totalLaps = 0;
   String _timeLeft = "00:00:00";
   String _totalTime = "00:00:00";
-  final raceDurationController = TextEditingController(text: "00:20:00");
-  final averageLaptimeController = TextEditingController(text: "01:39.7");
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  final raceDurationController = TextEditingController(text: "00:00:00");
+  final averageLaptimeController = TextEditingController(text: "00:00.0");
 
   void _getTotalLaps() {
     setState(() {
@@ -118,22 +114,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 textAlign: TextAlign.left),
             const Divider(),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('Total laps:'),
+              leading: const Icon(Icons.info),
+              title: const Text('Total laps:'),
               subtitle: Text(_totalLaps.toString()),
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('Time remaining on final lap:'),
+              leading: const Icon(Icons.info),
+              title: const Text('Time remaining on final lap:'),
               subtitle: Text(_timeLeft),
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('Total time:'),
+              leading: const Icon(Icons.info),
+              title: const Text('Total time:'),
               subtitle: Text(_totalTime),
             ),
             const SizedBox(height: 20),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {

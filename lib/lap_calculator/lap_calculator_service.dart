@@ -42,10 +42,6 @@ class LapCalculatorService {
     totalTime %= 3600;
     int minutes = totalTime ~/ 60;
     int seconds = totalTime % 60;
-    return hours.toString().padLeft(2, '0') +
-        ":" +
-        minutes.toString().padLeft(2, '0') +
-        ":" +
-        seconds.toString().padLeft(2, '0');
+    return "${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "338331612877",
+    "project_id": "race-calculator-3160c",
+    "storage_bucket": "race-calculator-3160c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:338331612877:android:78cf8de722dcca61385b84",
+        "android_client_info": {
+          "package_name": "com.example.race_calculator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg_fn74pzBq-hmgnPhGFse58BENmeZaGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
