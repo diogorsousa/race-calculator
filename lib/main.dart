@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'lap_calculator/lap_calculator_service.dart';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() {
   runApp(const MyApp());
@@ -75,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Padding getForm() {
     return Padding(
-      padding: const EdgeInsets.all(28),
+      padding: const EdgeInsets.only(left: 28, right: 28, top: 10),
       child: Form(
         child: Column(
           children: <Widget>[
@@ -109,24 +110,29 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             const SizedBox(height: 20),
-            Text('Results',
-                style: Theme.of(context).textTheme.bodyLarge,
-                textAlign: TextAlign.left),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('Total laps:'),
-              subtitle: Text(_totalLaps.toString()),
-            ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('Time remaining on final lap:'),
-              subtitle: Text(_timeLeft),
-            ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('Total time:'),
-              subtitle: Text(_totalTime),
+            Card(
+              child: Column(
+                children: <Widget>[
+                  const ListTile(
+                    title: Text('Results:'),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.info_outline),
+                    title: const Text('Total laps:'),
+                    subtitle: Text(_totalLaps.toString()),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.info_outline),
+                    title: const Text('Time remaining on final lap:'),
+                    subtitle: Text(_timeLeft),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.info_outline),
+                    title: const Text('Total time:'),
+                    subtitle: Text(_totalTime),
+                  )
+                ],
+              ),
             ),
             const SizedBox(height: 20),
             SizedBox(
@@ -144,24 +150,28 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  BottomNavigationBar getBottomNavigationBar() {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.timelapse),
-          label: 'Laps',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.repeat),
-          label: 'Fuel',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.car_crash_outlined),
-          label: 'Pit',
-        ),
-      ],
-      currentIndex: 0,
-      onTap: null,
+  SizedBox getBottomNavigationBar() {
+    return SizedBox(
+      height:
+          kIsWeb ? 90 : (Platform.isAndroid ? kBottomNavigationBarHeight : 90),
+      child: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.timelapse),
+            label: 'Laps',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.repeat),
+            label: 'Fuel',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.car_crash_outlined),
+            label: 'Pit',
+          ),
+        ],
+        currentIndex: 0,
+        onTap: null,
+      ),
     );
   }
 }
