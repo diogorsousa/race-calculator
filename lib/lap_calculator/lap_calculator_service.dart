@@ -21,6 +21,7 @@ class LapCalculatorService {
         convertAverageLapToSeconds(averageLap));
   }
 
+  // hrs:min:sec to seconds
   static int convertDurationToSeconds(String duration) {
     List<String> timeParts = duration.split(':');
     return int.parse(timeParts[0]) * 3600 +
@@ -28,6 +29,7 @@ class LapCalculatorService {
         int.parse(timeParts[2]);
   }
 
+  // min:sec.ms to sec
   static int convertAverageLapToSeconds(String averageLap) {
     List<String> lapParts = averageLap.split(':');
     int minutes = int.parse(lapParts[0]);
@@ -37,6 +39,7 @@ class LapCalculatorService {
     return minutes * 60 + seconds + milliseconds ~/ 1000;
   }
 
+  // seconds to hrs:min:sec
   static String convertTotalTimeToString(int totalTime) {
     int hours = totalTime ~/ 3600;
     totalTime %= 3600;

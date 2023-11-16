@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Race Calculator',
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.system,
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: const ColorScheme.dark()
@@ -37,14 +37,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final int _counter = 0;
   int _totalLaps = 0;
   String _timeLeft = "00:00:00";
   String _totalTime = "00:00:00";
   final raceDurationController = TextEditingController(text: "00:00:00");
   final averageLaptimeController = TextEditingController(text: "00:00.0");
 
-  void _getTotalLaps() {
+  void _calculate() {
     setState(() {
       _totalLaps = LapCalculatorService.getTotalLaps(
           raceDurationController.text, averageLaptimeController.text);
@@ -62,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -139,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  _getTotalLaps();
+                  _calculate();
                 },
                 child: const Text('Calculate'),
               ),
