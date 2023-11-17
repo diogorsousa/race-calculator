@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:race_calculator/models/lap_calculator_model.dart';
 import '../services/fuel_calculator_service.dart';
 
 class FuelCalculatorPage extends StatefulWidget {
@@ -13,9 +15,10 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
 
   void _calculate() {
     setState(() {
+      var totalLaps = context.read<LapCalculatorModel>().totalLaps;
       _fuelRequired = FuelCalculatorService.calculateFuelRequired(
           double.parse(fuelPerLapController.text),
-          10); // lap count needs to come from lap_calculator_page
+          totalLaps); // lap count needs to come from lap_calculator_page
     });
   }
 

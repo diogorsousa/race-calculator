@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:race_calculator/models/lap_calculator_model.dart';
 import '../services/lap_calculator_service.dart';
 
 class LapCalculatorPage extends StatefulWidget {
@@ -17,6 +19,9 @@ class _LapCalculatorPageState extends State<LapCalculatorPage> {
     setState(() {
       _totalLaps = LapCalculatorService.getTotalLaps(
           raceDurationController.text, averageLaptimeController.text);
+      Provider.of<LapCalculatorModel>(context, listen: false).totalLaps =
+          _totalLaps;
+
       _timeLeft = LapCalculatorService.getTimeRemaining(
           raceDurationController.text, averageLaptimeController.text);
       _totalTime = LapCalculatorService.getTotalTime(
