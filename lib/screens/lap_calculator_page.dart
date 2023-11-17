@@ -12,21 +12,53 @@ class _LapCalculatorPageState extends State<LapCalculatorPage> {
   int _totalLaps = 0;
   String _timeLeft = "00:00:00";
   String _totalTime = "00:00:00";
-  final raceDurationController = TextEditingController(text: "00:00:00");
-  final averageLaptimeController = TextEditingController(text: "00:00.0");
+  TextEditingController? raceDurationController;
+  TextEditingController? averageLaptimeController;
+
+  @override
+  void initState() {
+    super.initState();
+    raceDurationController = TextEditingController(
+        text: Provider.of<LapCalculatorModel>(context, listen: false)
+            .raceDuration);
+    averageLaptimeController = TextEditingController(
+        text: Provider.of<LapCalculatorModel>(context, listen: false).lapTime);
+    _timeLeft =
+        Provider.of<LapCalculatorModel>(context, listen: false).timeLeft;
+    _totalLaps =
+        Provider.of<LapCalculatorModel>(context, listen: false).totalLaps;
+    _totalTime =
+        Provider.of<LapCalculatorModel>(context, listen: false).totalTime;
+  }
 
   void _calculate() {
     setState(() {
       _totalLaps = LapCalculatorService.getTotalLaps(
-          raceDurationController.text, averageLaptimeController.text);
+          raceDurationController!.text, averageLaptimeController!.text);
+      _timeLeft = LapCalculatorService.getTimeRemaining(
+          raceDurationController!.text, averageLaptimeController!.text);
+      _totalTime = LapCalculatorService.getTotalTime(
+          raceDurationController!.text, averageLaptimeController!.text);
+
+      // set shared state in LapCalculatorModel
       Provider.of<LapCalculatorModel>(context, listen: false).totalLaps =
           _totalLaps;
-
-      _timeLeft = LapCalculatorService.getTimeRemaining(
-          raceDurationController.text, averageLaptimeController.text);
-      _totalTime = LapCalculatorService.getTotalTime(
-          raceDurationController.text, averageLaptimeController.text);
+      Provider.of<LapCalculatorModel>(context, listen: false).lapTime =
+          averageLaptimeController!.text;
+      Provider.of<LapCalculatorModel>(context, listen: false).raceDuration =
+          raceDurationController!.text;
+      Provider.of<LapCalculatorModel>(context, listen: false).timeLeft =
+          _timeLeft;
+      Provider.of<LapCalculatorModel>(context, listen: false).totalTime =
+          _totalTime;
     });
+  }
+
+  @override
+  void dispose() {
+    raceDurationController?.dispose();
+    averageLaptimeController?.dispose();
+    super.dispose();
   }
 
   @override

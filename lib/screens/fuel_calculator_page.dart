@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:race_calculator/models/lap_calculator_model.dart';
+import '../models/fuel_calculator_model.dart';
 import '../services/fuel_calculator_service.dart';
 
 class FuelCalculatorPage extends StatefulWidget {
@@ -9,16 +10,39 @@ class FuelCalculatorPage extends StatefulWidget {
 }
 
 class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
-  final fuelPerLapController = TextEditingController(text: "0.0");
-  final tankCapacityController = TextEditingController(text: "0");
+  TextEditingController? fuelPerLapController;
+  TextEditingController? tankCapacityController;
   double _fuelRequired = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    fuelPerLapController = TextEditingController(
+        text: Provider.of<FuelCalculatorModel>(context, listen: false)
+            .fuelPerLap
+            .toString());
+    tankCapacityController = TextEditingController(
+        text: Provider.of<FuelCalculatorModel>(context, listen: false)
+            .tankCapacity
+            .toString());
+
+    _fuelRequired =
+        Provider.of<FuelCalculatorModel>(context, listen: false).fuelRequired;
+  }
 
   void _calculate() {
     setState(() {
       var totalLaps = context.read<LapCalculatorModel>().totalLaps;
       _fuelRequired = FuelCalculatorService.calculateFuelRequired(
-          double.parse(fuelPerLapController.text),
-          totalLaps); // lap count needs to come from lap_calculator_page
+          double.parse(fuelPerLapController!.text), totalLaps);
+
+      // set shared state in LapCalculatorModel
+      Provider.of<FuelCalculatorModel>(context, listen: false).fuelRequired =
+          _fuelRequired;
+      Provider.of<FuelCalculatorModel>(context, listen: false).fuelPerLap =
+          double.parse(fuelPerLapController!.text);
+      Provider.of<FuelCalculatorModel>(context, listen: false).tankCapacity =
+          int.parse(tankCapacityController!.text);
     });
   }
 

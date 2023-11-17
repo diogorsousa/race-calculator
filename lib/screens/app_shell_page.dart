@@ -21,12 +21,18 @@ class _AppShellState extends State<AppShell> {
     // Add more pages here
   ];
 
+  final List<String> _titles = [
+    'Lap Calculator',
+    'Fuel Calculator',
+    // Add more titles here
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(_titles[_currentIndex]),
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: getBottomNavigationBar(),
