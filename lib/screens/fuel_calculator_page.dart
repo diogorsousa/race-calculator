@@ -14,6 +14,8 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
   TextEditingController? tankCapacityController;
   double _fuelRequired = 0.0;
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   void initState() {
     super.initState();
@@ -31,19 +33,30 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
   }
 
   void _calculate() {
-    setState(() {
-      var totalLaps = context.read<LapCalculatorModel>().totalLaps;
-      _fuelRequired = FuelCalculatorService.calculateFuelRequired(
-          double.parse(fuelPerLapController!.text), totalLaps);
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        var totalLaps = context.read<LapCalculatorModel>().totalLaps;
+        _fuelRequired = FuelCalculatorService.calculateFuelRequired(
+            double.parse(fuelPerLapController!.text), totalLaps);
 
-      // set shared state in LapCalculatorModel
-      Provider.of<FuelCalculatorModel>(context, listen: false).fuelRequired =
-          _fuelRequired;
-      Provider.of<FuelCalculatorModel>(context, listen: false).fuelPerLap =
-          double.parse(fuelPerLapController!.text);
-      Provider.of<FuelCalculatorModel>(context, listen: false).tankCapacity =
-          int.parse(tankCapacityController!.text);
-    });
+        // set shared state in LapCalculatorModel
+        Provider.of<FuelCalculatorModel>(context, listen: false).fuelRequired =
+            _fuelRequired;
+        Provider.of<FuelCalculatorModel>(context, listen: false).fuelPerLap =
+            double.parse(fuelPerLapController!.text);
+        Provider.of<FuelCalculatorModel>(context, listen: false).tankCapacity =
+            int.parse(tankCapacityController!.text);
+      });
+    }
+  }
+
+  bool isValidTankCapacity(String input) {
+    return int.tryParse(input) != null;
+  }
+
+  bool isValidFuelPerLap(String input) {
+    double? value = double.tryParse(input);
+    return value != null && value.toString() == input;
   }
 
   @override
@@ -62,17 +75,21 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
     return Padding(
       padding: const EdgeInsets.only(left: 28, right: 28, top: 10),
       child: Form(
+        key: _formKey,
         child: Column(
           children: <Widget>[
             TextFormField(
               controller: fuelPerLapController,
               decoration: const InputDecoration(
                 labelText: 'Fuel per lap',
+                helperText: " ",
                 filled: true,
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter fuel per lap';
+                } else if (!isValidFuelPerLap(value)) {
+                  return 'Invalid format. Please enter a number in the format #.#';
                 }
                 return null;
               },
@@ -82,11 +99,14 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
               controller: tankCapacityController,
               decoration: const InputDecoration(
                 labelText: 'Tank capacity',
+                helperText: " ",
                 filled: true,
               ),
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter tank capacity';
+                } else if (!isValidTankCapacity(value)) {
+                  return 'Invalid format. Please enter a number';
                 }
                 return null;
               },
@@ -103,13 +123,14 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
                     title: const Text('Fuel required:'),
                     subtitle: Text(_fuelRequired.toString()),
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
+              child: FilledButton(
                 onPressed: () {
                   _calculate();
                 },

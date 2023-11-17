@@ -10,11 +10,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Race Calculator',
       themeMode: ThemeMode.system,
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorScheme: const ColorScheme.dark()
-            .copyWith(primary: const Color.fromARGB(255, 50, 146, 130)),
-        useMaterial3: true,
+      theme: ThemeData.from(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue))
+          .copyWith(
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          },
+        ),
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: <TargetPlatform, PageTransitionsBuilder>{
+            TargetPlatform.android: ZoomPageTransitionsBuilder(),
+          },
+        ),
       ),
       home: const AppShell(title: 'Lap Calculator'),
       debugShowCheckedModeBanner: false,

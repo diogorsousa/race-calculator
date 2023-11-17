@@ -31,7 +31,6 @@ class _AppShellState extends State<AppShell> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(_titles[_currentIndex]),
       ),
       body: _pages[_currentIndex],
@@ -58,6 +57,9 @@ class _AppShellState extends State<AppShell> {
             label: 'Pit',
           ),
         ],
+        selectedItemColor: Theme.of(context)
+            .colorScheme
+            .primary, // set the selected item color to the secondary color of the current theme
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
