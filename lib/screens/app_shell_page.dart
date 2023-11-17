@@ -46,11 +46,11 @@ class _AppShellState extends State<AppShell> {
       child: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.timelapse),
+            icon: Icon(Icons.update),
             label: 'Laps',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.repeat),
+            icon: Icon(Icons.local_gas_station),
             label: 'Fuel',
           ),
           BottomNavigationBarItem(
