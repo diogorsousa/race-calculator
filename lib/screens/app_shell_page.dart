@@ -52,14 +52,10 @@ class _AppShellState extends State<AppShell> {
             icon: Icon(Icons.local_gas_station),
             label: 'Fuel',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.car_crash_outlined),
-            label: 'Pit',
-          ),
         ],
         selectedItemColor: Theme.of(context)
             .colorScheme
-            .primary, // set the selected item color to the secondary color of the current theme
+            .inversePrimary, // set the selected item color to the secondary color of the current theme
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {

@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Race Calculator',
       themeMode: ThemeMode.system,
       theme: ThemeData.from(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue))
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal))
           .copyWith(
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       darkTheme: ThemeData.dark().copyWith(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
             TargetPlatform.android: ZoomPageTransitionsBuilder(),

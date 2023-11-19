@@ -3,9 +3,9 @@
     "short_name": "Race Calculator",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#006A60",
+    "theme_color": "#006A60",
+    "description": "A race calculator for laps, fuel and pit stops",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

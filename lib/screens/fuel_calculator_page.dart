@@ -13,6 +13,7 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
   TextEditingController? fuelPerLapController;
   TextEditingController? tankCapacityController;
   double _fuelRequired = 0.0;
+  int _pitstops = 0;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -30,6 +31,8 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
 
     _fuelRequired =
         Provider.of<FuelCalculatorModel>(context, listen: false).fuelRequired;
+    _pitstops =
+        Provider.of<FuelCalculatorModel>(context, listen: false).pitstops;
   }
 
   void _calculate() {
@@ -38,6 +41,8 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
         var totalLaps = context.read<LapCalculatorModel>().totalLaps;
         _fuelRequired = FuelCalculatorService.calculateFuelRequired(
             double.parse(fuelPerLapController!.text), totalLaps);
+        _pitstops = FuelCalculatorService.calculatePitstops(
+            _fuelRequired, double.parse(tankCapacityController!.text));
 
         // set shared state in LapCalculatorModel
         Provider.of<FuelCalculatorModel>(context, listen: false).fuelRequired =
@@ -46,6 +51,8 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
             double.parse(fuelPerLapController!.text);
         Provider.of<FuelCalculatorModel>(context, listen: false).tankCapacity =
             int.parse(tankCapacityController!.text);
+        Provider.of<FuelCalculatorModel>(context, listen: false).pitstops =
+            _pitstops;
       });
     }
   }
@@ -122,6 +129,11 @@ class _FuelCalculatorPageState extends State<FuelCalculatorPage> {
                     leading: const Icon(Icons.info_outline),
                     title: const Text('Fuel required:'),
                     subtitle: Text(_fuelRequired.toString()),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.info_outline),
+                    title: const Text('Pitstops required:'),
+                    subtitle: Text(_pitstops.toString()),
                   ),
                   const SizedBox(height: 20),
                 ],
