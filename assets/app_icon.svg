@@ -18,7 +18,7 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview7"
-     pagecolor="#505050"
+     pagecolor="#ffffff"
      bordercolor="#eeeeee"
      borderopacity="1"
      inkscape:showpageshadow="0"
@@ -27,13 +27,13 @@
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="10.35098"
-     inkscape:cx="17.872704"
-     inkscape:cy="54.729118"
-     inkscape:window-width="3440"
-     inkscape:window-height="1351"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:zoom="14.638496"
+     inkscape:cx="30.023576"
+     inkscape:cy="42.490703"
+     inkscape:window-width="1720"
+     inkscape:window-height="1369"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
   <defs
@@ -42,6 +42,13 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.572638"
+       id="rect289"
+       width="12.705461"
+       height="12.702359"
+       x="-1.3158192e-08"
+       y="-2.5560583e-09" />
     <rect
        style="fill:#f9f9f9;stroke-width:0.481792"
        id="rect223"
